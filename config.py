@@ -3,7 +3,18 @@
 
 from dotenv import load_dotenv
 import os
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 load_dotenv()
 
 DATABASE_URI = os.getenv("DATABASE_URI")
+
+engine = create_engine(DATABASE_URI)
+# engine gives SQA the power to create/edit tables
+
+Session = sessionmaker(bind=engine)
+
+def recreate_database():
+    Base.metadata.drop_all(engine)
+    Base.metadata.create_all(engine)

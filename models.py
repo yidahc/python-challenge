@@ -9,8 +9,11 @@ class Solution(Base):
     __tablename__ = 'solutions'
     id = Column(Integer, primary_key=True)
     solution = Column(String)
+    n = Column(Integer)
 
 #Defining how our data will be represented
     def __repr__(self):
-        return "<Solution(solution='{}')>"\
-            .format(self.solution)
+        return "<Solution(id='{}', solution='{}', n='{}')>"\
+            .format(self.id, self.solution, self.n)
+
+# sqlalchemy & postgress learned from https://www.learndatasci.com/tutorials/using-databases-python-postgres-sqlalchemy-and-alembic/?fbclid=IwAR2YYvFgPMvGfEIeFPSVsZ0XvIQCWpvzAWhcMr0lU-9jNL9ndvbbU3pPluQ
