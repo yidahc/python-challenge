@@ -15,3 +15,12 @@ services:
     volumes:
       - ./results-api/src:/app
       # This mounts the .results-api/src directory on our host computer to the /app directory in the container. 
+
+
+  front-end:
+      build:
+        context: ./front-end
+      ports:
+        - 5000:5000
+      volumes:
+        - ./front-end/src:/app
