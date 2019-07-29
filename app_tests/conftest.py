@@ -1,6 +1,8 @@
-from config import Session
-from models import Solution
+from ..resultsAPI import src
+from src import Session, Solution
 import pytest
+# importing learned here https://stackoverflow.com/questions/20075884/python-import-module-from-another-directory-at-the-same-level-in-project-hierar
+# and here https://docs.python.org/2/tutorial/modules.html#intra-package-references
 
 @pytest.fixture
 def supply_results():

@@ -1,10 +1,4 @@
-from models import Base, Solution
-from config import Session, recreate_database
-
-recreate_database()
-
-s = Session()
-
+from models import db
 
 def nQueens(n, board=[]):
   if len(board) == n:
@@ -12,8 +6,9 @@ def nQueens(n, board=[]):
     solution = str(board),
     n = n
     )
-    s.add(solution)
-
+    db.session.add(solution)
+    db.session.commit()
+    
   for c in set(range(n)) - set(board):
     if not threatened (board, c):
       nQueens(n, board + [c])
@@ -28,8 +23,17 @@ def threatened (board, newRow):
       return True
   return False
 
-queensN = input("Enter N:")
-nQueens(int(queensN))
 
-s.commit()
-s.close()
+def get_all():
+    solutions = Solution.query.all()
+
+    all_solutions = []
+    for x in solutions:
+        new_solution = {
+            "id": x.id,
+            "solution": x.solution,
+            "n": x.n
+        }
+
+        all_solutions.append(new_solution)
+    return all_solutions

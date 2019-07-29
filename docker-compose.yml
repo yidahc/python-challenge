@@ -1,0 +1,43 @@
+version: '3.5'
+# version of docker-compose that we are using
+services:
+# containters we want to run
+  #front-end:
+  #displays html to the user
+  results-api:
+  #name of service
+    container_name: results-api
+    # provides an API for CRUD* operations to database
+    build:
+    # Docker parses the docker-compose file and builds our services according to the build instructions.
+      context: ./results-api
+      # where the Dockerfile is located at to build the image
+    env_file: database.conf
+    ports:
+      - 5000:5000
+    volumes:
+      - ./results-api/src:/app  
+      # This mounts the .results-api/src directory on our host computer to the /app directory in the container. 
+
+  database:
+    container_name: postgres
+    # provides an instance of postgress database
+    image: postgres:latest
+    env_file: database.conf
+    # dotenv file
+    volumes:
+    - db_volume:/var/lib/postgresql
+    # Inside the container, this directory is where Postgres stores all the relevant tables and databases.
+    # We are defining a volume inside the compose file and mounting it at this mount point.
+    ports:
+      - 5001:5432 
+    # host machine:dbcontainer ports 
+    # map ports from the host machine to the container
+
+volumes:
+  # For data persistence purposes, we are storing data in a mouted volume which we have named db-data
+  db_volume:
+
+  # database with docker-compose learned here: https://linuxhint.com/run_postgresql_docker_compose/
+  # and here: https://medium.com/@audretschjames/understanding-docker-as-if-it-were-a-gameboy-96c96392efbf
+
