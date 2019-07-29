@@ -2,16 +2,16 @@ version: '3.5'
 # version of docker-compose that we are using
 services:
 
-  server:
+  results-api:
   #name of service
     # provides an API for CRUD* operations to database
     build:
     # Docker parses the docker-compose file and builds our services according to the build instructions.
-      context: .
+      context: ./results-api
       # where the Dockerfile is located at to build the image
     #env_file: database.conf
     ports:
-      - 5000:5000
+      - 5001:5000
     volumes:
-      - ./src:/app  
+      - ./results-api/src:/app
       # This mounts the .results-api/src directory on our host computer to the /app directory in the container. 
