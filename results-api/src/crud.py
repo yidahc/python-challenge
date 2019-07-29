@@ -23,3 +23,4 @@ def threatened (board, newRow):
   return False
 
 #print (nQueens(5))
+

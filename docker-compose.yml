@@ -9,9 +9,10 @@ services:
     # Docker parses the docker-compose file and builds our services according to the build instructions.
       context: ./results-api
       # where the Dockerfile is located at to build the image
-    #env_file: database.conf
+    env_file: database.conf
+      # dotenv file w/variables necessary to connect to postgress-database:5432
     ports:
-      - 5001:5000
+      - 5001:5002
     
     volumes:
       - ./results-api/src:/app
@@ -22,17 +23,16 @@ services:
       build:
         context: ./front-end
       environment:
-      - RESULTS_API_SERVER=http://results-api:5000
+      - RESULTS_API_SERVER=http://results-api:5432
       ports:
-        - 5000:5000
+        - 5000:5002
       volumes:
         - ./front-end/src:/app
 
   postgres-database:
-      # provides an instance of postgress database
       image: postgres:latest
-      env_file: database.conf
-      # dotenv file
+
+      # provides an instance of postgress database
       volumes:
         - db_volume:/var/lib/postgresql
     # Inside the container, this directory is where Postgres stores all the relevant tables and databases.
@@ -47,6 +47,7 @@ services:
 volumes:
   # For data persistence purposes, we are storing data in a mouted volume which we have named db-data
   db_volume:
+    driver: local
 
   # database with docker-compose learned here: https://linuxhint.com/run_postgresql_docker_compose/
   # and here: https://medium.com/@audretschjames/understanding-docker-as-if-it-were-a-gameboy-96c96392efbf
