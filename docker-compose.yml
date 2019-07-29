@@ -2,22 +2,47 @@ version: '3.5'
 # version of docker-compose that we are using
 services:
 # containters we want to run
-  database:
-    container_name: postgres
-    # provides an instance of postgress database
-    image: postgres:latest
-    env_file: database.conf
-    # dotenv file
+  results-api:
+  #name of service
+    # provides an API for CRUD* operations to database
+    build:
+    # Docker parses the docker-compose file and builds our services according to the build instructions.
+      context: ./results-api
+      # where the Dockerfile is located at to build the image
+    #env_file: database.conf
+    ports:
+      - 5001:5000
+    
     volumes:
-    - db_volume:/var/lib/postgresql
+      - ./results-api/src:/app
+      # This mounts the .results-api/src directory on our host computer to the /app directory in the container. 
+
+
+  front-end:
+      build:
+        context: ./front-end
+      environment:
+      - RESULTS_API_SERVER=http://results-api:5000
+      ports:
+        - 5000:5000
+      volumes:
+        - ./front-end/src:/app
+
+  postgres-database:
+      # provides an instance of postgress database
+      image: postgres:latest
+      env_file: database.conf
+      # dotenv file
+      volumes:
+        - db_volume:/var/lib/postgresql
     # Inside the container, this directory is where Postgres stores all the relevant tables and databases.
     # We are defining a volume inside the compose file and mounting it at this mount point.
-    ports:
-      - 127.0.0.1:5000:5432
+      ports:
+        - 5002:5432
     # host machine:dbcontainer ports 
     # map ports from the host machine to the container
     # incoming requests at docker host port 5002 will be forwarded to the port 5432 of 
-    # the database container, where Postgres server can process it.
+    # the database container, where Postgres server can process it. IP: 172.22.0.4
 
 volumes:
   # For data persistence purposes, we are storing data in a mouted volume which we have named db-data
@@ -25,4 +50,3 @@ volumes:
 
   # database with docker-compose learned here: https://linuxhint.com/run_postgresql_docker_compose/
   # and here: https://medium.com/@audretschjames/understanding-docker-as-if-it-were-a-gameboy-96c96392efbf
-
