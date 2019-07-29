@@ -7,7 +7,6 @@ def nQueens(n, board=[]):
     n = n
     )
     db.session.add(solution)
-    db.session.commit()
     
   for c in set(range(n)) - set(board):
     if not threatened (board, c):
@@ -26,7 +25,6 @@ def threatened (board, newRow):
 
 def get_all():
     solutions = Solution.query.all()
-
     all_solutions = []
     for x in solutions:
         new_solution = {
