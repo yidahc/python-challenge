@@ -2,8 +2,18 @@ version: '3.5'
 # version of docker-compose that we are using
 services:
 # containters we want to run
-  #front-end:
+  front-end:
   #displays html to the user
+    container_name: front-end
+    build:
+      context: ./front-end
+    environment:
+      - RESULTS_API_SERVER=http://results-api:5000    
+    ports:
+      - 5002:5000
+    volumes:
+      - ./front-end/src:/app
+
   results-api:
   #name of service
     container_name: results-api

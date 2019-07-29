@@ -19,8 +19,9 @@ app = create_app()
 @app.route('/add', methods=['POST'])
 def add():
     data = request.get_json()
-    
-    nQueens(data)
+    n = data.n
+
+    nQueens(n)
     
     return json.dumps("Solutions Added"), 200
 
