@@ -13,9 +13,10 @@ WORKDIR /app
 
 # Expose flask's port
 EXPOSE 5000
+# in docker container this will run on port 5000 with assigned ip address (results-api)
 
 # Run the server
-CMD flask run app.py 
+CMD python server.py 
 
 # Docker and docker-compose learned here: 
 # https://medium.com/@audretschjames/understanding-docker-as-if-it-were-a-gameboy-96c96392efbf

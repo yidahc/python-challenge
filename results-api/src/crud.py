@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <<<<<<< HEAD:results-api/src/crud.py
 from models import db
 =======
@@ -9,19 +10,18 @@ recreate_database()
 s = Session()
 
 >>>>>>> 7bb58e5b63877f8df77406a97ec4bfe104cb0c16:crud.py
+=======
+>>>>>>> dockerCompose
 
-def nQueens(n, board=[]):
+def nQueens(n, board=[], results = []):
   if len(board) == n:
-    solution = Solution(
-    solution = str(board),
-    n = n
-    )
-    db.session.add(solution)
-    db.session.commit()
+    results.append(board)
     
   for c in set(range(n)) - set(board):
     if not threatened (board, c):
-      nQueens(n, board + [c])
+      nQueens(n, board + [c], results)
+  
+  return results
 
 # nQueens code partially based off last code in the comments on http://code.activestate.com/recipes/576647-eight-queens-six-lines/?fbclid=IwAR2agAgxDON-HRZieQm3hcSfXRIcho0PStTml6uScNrs-McgXf7nydvyZaM
 # but mostly based off my own solution in javascript that I wrote during HolaCode
@@ -35,17 +35,5 @@ def threatened (board, newRow):
       return True
   return False
 
+print (nQueens(int(8)))
 
-def get_all():
-    solutions = Solution.query.all()
-
-    all_solutions = []
-    for x in solutions:
-        new_solution = {
-            "id": x.id,
-            "solution": x.solution,
-            "n": x.n
-        }
-
-        all_solutions.append(new_solution)
-    return all_solutions

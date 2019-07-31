@@ -1,14 +1,15 @@
-import requests 
-import os
-from flask import Flask, render_template, request, jsonify, redirect, url_for
+import requests, os
+from flask import Flask, render_template, request, redirect, url_for
 
-RESULTS_API_SERVER = 'os.environ['RESULTS_API_SERVER']'
+RESULTS_API_SERVER = os.environ['RESULTS_API_SERVER']
 app = Flask(__name__)
 
-@app.route('/view')
+# this will run on local computer on http://0.0.0.0:5000
+@app.route('/solutions')
 def show_solutions():
-    Results = requests.get(RESULTS_API_SERVER + "/").json()
-    return render_template('show_solutions.html', solutions=Results)
+    Solutions = requests.get(RESULTS_API_SERVER + "/show").json()  
+    # RESULTS_API_SERVER is where the results-api is running within its container
+    return render_template('show_solutions.html', solutions=Solutions)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -21,7 +22,8 @@ def add_solutions():
         }
         response = requests.post(RESULTS_API_SERVER + "/add", json=json)
         if response.status_code == 200:
-            return redirect(url_for('show_solutions'))
+            return redirect(url_for('show_solutions'))  
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
