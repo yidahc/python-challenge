@@ -14,6 +14,7 @@ port = os.environ['POSTGRES_PORT']
 DATABASE_CONNECTION_URI = f'postgresql+psycopg2://{user}:{password}@{host}:{port}/{database}'
 
 
+
 #engine = create_engine(DATABASE_URI)
 # engine gives SQA the power to create/edit tables on postgress
 

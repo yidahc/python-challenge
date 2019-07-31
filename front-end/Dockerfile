@@ -5,5 +5,5 @@ RUN pip install -r /tmp/requirements.txt
 
 WORKDIR /app
 
-EXPOSE 5432
+EXPOSE 5000
 CMD python server.py

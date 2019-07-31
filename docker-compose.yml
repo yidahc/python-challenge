@@ -12,42 +12,45 @@ services:
     env_file: database.conf
       # dotenv file w/variables necessary to connect to postgress-database:5432
     ports:
-      - 5001:5002
-    
+      - 5001:5000  # <host machine>:<container> map ports from the host machine to the container
+    # incoming requests at host port 5001 will be forwarded to the port 5000 of the api container
     volumes:
       - ./results-api/src:/app
       # This mounts the .results-api/src directory on our host computer to the /app directory in the container. 
-
+    depends_on:
+      - postgres-database
+    # it will wait for database to start before starting this service.
 
   front-end:
       build:
         context: ./front-end
       environment:
-      - RESULTS_API_SERVER=http://results-api:5432
+      - RESULTS_API_SERVER=http://results-api:5000
       ports:
-        - 5000:5002
+        - 5000:5000
       volumes:
         - ./front-end/src:/app
+      depends_on:
+        - results-api
 
   postgres-database:
       image: postgres:latest
-
       # provides an instance of postgress database
+      environment:
+        POSTGRES_USER: docker
+        POSTGRES_PASSWORD: docker
+        # postgress automatically makes the user and password based on these env variables
+        # so we can use this user and pswd on api to connect to db
       volumes:
         - db_volume:/var/lib/postgresql
     # Inside the container, this directory is where Postgres stores all the relevant tables and databases.
     # We are defining a volume inside the compose file and mounting it at this mount point.
-      ports:
-        - 5002:5432
-    # host machine:dbcontainer ports 
-    # map ports from the host machine to the container
-    # incoming requests at docker host port 5002 will be forwarded to the port 5432 of 
-    # the database container, where Postgres server can process it. IP: 172.22.0.4
+    # ports not needed since docker image automatically exposes port 5432
 
 volumes:
   # For data persistence purposes, we are storing data in a mouted volume which we have named db-data
   db_volume:
-    driver: local
 
-  # database with docker-compose learned here: https://linuxhint.com/run_postgresql_docker_compose/
+  # postgress with docker-compose learned here: https://docs.docker.com/samples/library/postgres/
+  # and here: https://linuxhint.com/run_postgresql_docker_compose/
   # and here: https://medium.com/@audretschjames/understanding-docker-as-if-it-were-a-gameboy-96c96392efbf

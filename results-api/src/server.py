@@ -2,7 +2,7 @@ import json
 from __init__ import create_app
 from flask import request
 from crud import nQueens
-from models import db
+from models import db, Solution
 
 app = create_app()
 
