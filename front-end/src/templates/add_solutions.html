@@ -8,31 +8,20 @@
   </head>
 
   <body>
-      
-    <div class="container">
-
-        <h1 class="display-4 mb-4 mt-4">Solutions</h1>
-        
-        <table class='table'>
-            <thead>
-                <tr>
-                    <th>Solutions</th>
-                    <th># of Queens</th>
-                    <th>Number of solutions</th>
-                </tr>
-            </thead>
-            <tbody>
-                    {% for x in solutions %}
-                    <tr>
-                            <td>{{x.array}}</td>
-                            <td>{{x.n}}</td>
-                            <td>{{x.total}}</td>
-                    </tr>
-                    {% endfor %}
-            </tbody>
-        </table>
-    </div>
-
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1 class="display-4 mb-4 mt-4">Solve N Queens</h1>
+                    <form action="{{url_for('add_solutions')}}" method="post">
+                        <div class="form-group">
+                            <label for="n">Enter N:</label>
+                            <input type="text" name="n" class="form-control" id="n">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form> 
+                </div>
+            </div>
+        </div>
 
     <!-- JS Bootstrap Dependencies -->
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>

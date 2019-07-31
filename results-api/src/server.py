@@ -1,8 +1,8 @@
 import json
 from __init__ import create_app
 from flask import request
-from crud import nQueens
 from models import db, Solution
+from crud import nQueens
 
 app = create_app()
 
@@ -11,25 +11,31 @@ app = create_app()
 def add():
     data = request.get_json()
     n = data['n']
-    results = nQueens(n)
+    results = nQueens(int(n), [], [])
+    # for some reason, after its already bee run once, nQueens does not run
+    #  with an empty array for results unless specified here at calltime
+    print (results)
+    total = len(results)
     for result in results:
-      solution = Solution(
-      solution = str(result),
-      n = n
-      )
-      db.session.add(solution)
-      db.session.commit()
+        entry = Solution(
+        array = str(result),
+        n = n,
+        total = total
+        )
+        db.session.add(entry)
+    db.session.commit()
     return json.dumps("Solutions Added"), 200
 
-@app.route('/solutions', methods=["GET"])
+@app.route('/show', methods=["GET"])
 def fetch():
     solutions = Solution.query.all()
     all_solutions = []
     for x in solutions:
         new_solution = {
             "id": x.id,
-            "solution": x.solution,
-            "n": x.n
+            "array": x.array,
+            "n": x.n,
+            "total": x.total
         }
 
         all_solutions.append(new_solution)

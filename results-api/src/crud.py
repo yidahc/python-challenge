@@ -1,12 +1,11 @@
-results = []
 
-def nQueens(n, board=[]):
+def nQueens(n, board=[], results = []):
   if len(board) == n:
     results.append(board)
     
   for c in set(range(n)) - set(board):
     if not threatened (board, c):
-      nQueens(n, board + [c])
+      nQueens(n, board + [c], results)
   
   return results
 
@@ -22,5 +21,5 @@ def threatened (board, newRow):
       return True
   return False
 
-#print (nQueens(5))
+print (nQueens(int(8)))
 

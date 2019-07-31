@@ -8,17 +8,13 @@ db = SQLAlchemy()
 class Solution(db.Model):
     __tablename__ = 'solutions'
     id = db.Column(db.Integer, primary_key=True)
-    solution = db.Column(db.String(50))
+    array = db.Column(db.String(50))
     n = db.Column(db.Integer)
-
- #   def __init__(self, id, solution, n):
- #       self.id = id
- #       self.solution = solution
- #       self.n = n
+    total = db.Column(db.Integer)
 
 #Defining how our data will be represented
-    def __repr__(self):
-        return "<Solution(id='{}', solution='{}', n='{}')>"\
-            .format(self.id, self.solution, self.n)
+ #   def __repr__(self):
+  #      return "<Solution(id='{}', array='{}', n='{}', total='{}')>"\
+   #         .format(self.id, self.array, self.n, self.total)
 
 # sqlalchemy & postgress learned from https://www.learndatasci.com/tutorials/using-databases-python-postgres-sqlalchemy-and-alembic/?fbclid=IwAR2YYvFgPMvGfEIeFPSVsZ0XvIQCWpvzAWhcMr0lU-9jNL9ndvbbU3pPluQ

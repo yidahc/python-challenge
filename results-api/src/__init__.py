@@ -8,5 +8,6 @@ def create_app():
     flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     flask_app.app_context().push() # since Flask can have multiple apps we have to specify which app we are using with SQLAlchemy, hence we push the context with our newly created app. 
     db.init_app(flask_app) # linking db to flask app
+    db.drop_all() # deleting all databases so we start with an empty database
     db.create_all() # creating table(s) in database, using models.py
     return flask_app
