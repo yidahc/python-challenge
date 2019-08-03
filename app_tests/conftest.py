@@ -3,9 +3,6 @@ import requests
 from front-end import RESULTS_API_SERVER
 from 
 
-# importing learned here https://stackoverflow.com/questions/20075884/python-import-module-from-another-directory-at-the-same-level-in-project-hierar
-# and here https://docs.python.org/2/tutorial/modules.html#intra-package-references
-
 @pytest.fixture
 def supply_results():
 

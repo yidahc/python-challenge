@@ -3,12 +3,6 @@ from queens import bishop_threatened, nQueens, checkBoard
 
 n = 10
 
-partialBoard = [0, 2, 5]
-
-validAddition = 1
-
-threatenedAddition = 3
-
 validBoard = [5, 8, 2, 0, 3, 6, 9, 1, 4, 7]
 
 invalidRookBoard = [3, 7, 2, 8, 6, 9, 8, 5, 1, 4]
@@ -31,17 +25,20 @@ solutionNumbers =	{
     12: 14200
     }
 
-def test_bishop_threatened():
-  assert bishop_threatened(partialBoard, threatenedAddition)
-  assert not bishop_threatened(partialBoard, validAddition)
-  
-def test_checkBoard():
-  assert checkBoard(validBoard, n)
+@pytest.mark.parametrize("board, addition",[([0, 2, 5],3),([2, 5, 1, 4, 7],6)])
+def test_bishop_threatened(board, addition):
+  assert bishop_threatened(board, addition)
+  assert not bishop_threatened([0, 2, 5], 1)
+
+@pytest.mark.parametrize("board, queen",[(validBoard,n),([2, 5, 1, 4, 7, 0, 6, 3],8)])
+def test_checkBoard(board, queen):
+  assert checkBoard(board, queen)
   assert not checkBoard (invalidBishopBoard, n)
   assert not checkBoard (invalidRookBoard, n)
 
-def test_solution_amount():
-  amount = len(nQueens(n, [], []))
+@pytest.mark.parametrize("queen",[(4),(8),(10)])
+def test_solution_amount(queen):
+  amount = len(nQueens(queen, [], []))
   assert amount == solutionNumbers[n]
 
 def test_nQueens():
