@@ -1,4 +1,3 @@
-from models import db
 
 def nQueens(n, board=[], results=[]):
   if len(board) == n:
