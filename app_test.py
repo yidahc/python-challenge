@@ -1,5 +1,7 @@
 import pytest
-from api import (
+from api import src
+from src import queens 
+from queens import (
   bishop_threatened, nQueens, checkBoard)
 
 n = 10
