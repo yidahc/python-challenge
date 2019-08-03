@@ -1,5 +1,5 @@
-from results-api import queens
-from queens import bishop_threatened, nQueens, checkBoard
+import pytest
+from api.src.queens import bishop_threatened, nQueens, checkBoard
 
 n = 10
 
@@ -39,12 +39,12 @@ def test_checkBoard(board, queen):
 @pytest.mark.parametrize("queen",[(4),(8),(10)])
 def test_solution_amount(queen):
   amount = len(nQueens(queen, [], []))
-  assert amount == solutionNumbers[n]
+  assert amount == solutionNumbers[queen]
 
 def test_nQueens():
   solutions = nQueens(n, [], [])
   for solution in solutions:
-    assert checkBoard(solution)
+    assert checkBoard(solution, n)
 
 
  # solution numbers found on page 314 of https://camo.ici.ro/journal/vol19/v19b11.pdf

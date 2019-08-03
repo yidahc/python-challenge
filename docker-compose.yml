@@ -7,7 +7,7 @@ services:
     # provides an API for CRUD* operations to database
     build:
     # Docker parses the docker-compose file and builds our services according to the build instructions.
-      context: ./results-api
+      context: ./api
       # where the Dockerfile is located at to build the image
     env_file: database.conf
       # dotenv file w/variables necessary to connect to postgress-database:5432
