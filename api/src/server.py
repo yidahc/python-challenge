@@ -1,8 +1,8 @@
 import json
 from __init__ import create_app
 from flask import request
-from models import db, Solution
-from queens import nQueens
+from .models import db, Solution
+from .queens import nQueens
 
 app = create_app()
 
