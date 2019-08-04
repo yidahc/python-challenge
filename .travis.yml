@@ -1,0 +1,15 @@
+language: python
+
+python:
+ - "3.6"
+
+cache: pip
+
+install:
+  - pip install -r requirements.txt
+
+script: python app_test.py
+
+
+# https://www.smartfile.com/blog/testing-python-with-travis-ci/
+# https://docs.travis-ci.com/user/docker/#using-docker-compose

@@ -1,8 +1,8 @@
 import json
 from __init__ import create_app
 from flask import request
-from models import db, Solution
-from crud import nQueens
+from .models import db, Solution
+from .queens import nQueens
 
 app = create_app()
 
@@ -12,8 +12,8 @@ def add():
     data = request.get_json()
     n = data['n']
     results = nQueens(int(n), [], [])
-    # for some reason, after its already bee run once, nQueens does not run
-    #  with an empty array for results unless specified here at calltime
+    # After its already been run once, nQueens does not run with
+    # an empty array for results unless specified here at calltime
     print (results)
     total = len(results)
     for result in results:
