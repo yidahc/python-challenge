@@ -48,3 +48,5 @@ def test_nQueens():
 
 
  # solution numbers found on page 314 of https://camo.ici.ro/journal/vol19/v19b11.pdf
+
+# tests based heavily off https://github.com/cuenca-mx/clabe-python/blob/master/test_clabe.py

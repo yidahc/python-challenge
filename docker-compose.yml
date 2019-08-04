@@ -1,3 +1,5 @@
+import os
+
 version: '3.5'
 # version of docker-compose that we are using
 services:
@@ -23,22 +25,20 @@ services:
 
   front-end:
       build:
-        context: ./front-end
+        context: ./frontend
       environment:
-      - RESULTS_API_SERVER=http://results-api:5000
+      - RESULTS_API_SERVER = os.environ['RESULTS_API_SERVER']
       ports:
         - 5000:5000
       volumes:
-        - ./front-end/src:/app
+        - ./frontend/src:/app
       depends_on:
         - results-api
 
   postgres-database:
       image: postgres:latest
       # provides an instance of postgress database
-      environment:
-        POSTGRES_USER: docker
-        POSTGRES_PASSWORD: docker
+      env_file: database.conf
         # postgress automatically makes the user and password based on these env variables
         # so we can use this user and pswd on api to connect to db
       volumes:
