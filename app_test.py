@@ -46,6 +46,8 @@ def test_nQueens():
   for solution in solutions:
     assert checkBoard(solution, n)
 
+def test_api(supply_results):
+  assert supply_results()
 
  # solution numbers found on page 314 of https://camo.ici.ro/journal/vol19/v19b11.pdf
 
