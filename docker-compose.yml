@@ -44,7 +44,7 @@ services:
         - db_volume:/var/lib/postgresql
     # Inside the container, this directory is where Postgres stores all the relevant tables and databases.
     # We are defining a volume inside the compose file and mounting it at this mount point.
-    # ports not needed since docker image automatically exposes port 5432
+    # ports not needed since docker image automatically exposes port 5432 and does not need access to/from local computer
 
 volumes:
   # For data persistence purposes, we are storing data in a mouted volume which we have named db-data
