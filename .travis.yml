@@ -9,9 +9,6 @@ python:
 services:
   - docker # to build docker-compose containers for further api testing
 
-env:
-  - RESULTS_API_SERVER = http://results-api:5000
-
 before_install:
   - sudo apt-get update
   - pip install codecov

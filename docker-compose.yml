@@ -9,8 +9,14 @@ services:
     # Docker parses the docker-compose file and builds our services according to the build instructions.
       context: ./api
       # where the Dockerfile is located at to build the image
-    env_file: database.conf
-    # dotenv file w/variables necessary to connect to postgress-database:5432
+    enviornment: 
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_HOST
+      - POSTGRES_DB
+      - POSTGRES_PORT
+      - RESULTS_API_SERVER
+    # variables necessary to connect to postgress-database:5432
     ports:
       - 5001:5000  # <host machine>:<container> map ports from the host machine to the container
     # incoming requests at host port 5001 will be forwarded to the port 5000 of the api container
@@ -26,7 +32,7 @@ services:
       build:
         context: ./frontend
       environment:
-      - RESULTS_API_SERVER = http://results-api:5000
+        - RESULTS_API_SERVER
       ports:
         - 5000:5000
       volumes:
@@ -37,7 +43,9 @@ services:
   postgres-database:
       image: postgres:latest
       # provides an instance of postgress database
-      env_file: database.conf
+      enviornment: 
+        - POSTGRES_USER
+        - POSTGRES_PASSWORD
         # postgress automatically makes the user and password based on these env variables
         # so we can use this user and pswd on api to connect to db
       volumes:
