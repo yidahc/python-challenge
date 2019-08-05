@@ -4,20 +4,23 @@ python:
   - 2.7
   - 3.5
   - 3.6
-# versions of pytest we are running tests on
+# versions of python we are running tests on
 
 services:
   - docker # to build docker-compose containers for further api testing
 
 before_install:
-  - pip install -U pip # ensure we are working with the latest version of pip 
-  - pip install -U pytest # 
+  - pip install pip # ensure we are working with the latest version of pip 
+  - pip install pytest # 
   - pip install codecov
   - docker-compose build
   - docker-compose up
 
 install:
-  - pip install -r testrequirements.txt
+  - pip install Flask==1.0.2
+  - pip install requests==2.7.0
+  - pip install psycopg2-binary==2.7.6.1
+  - pip install flask-sqlalchemy==2.3.0 
 
 script: python app_test.py # run tests
 
