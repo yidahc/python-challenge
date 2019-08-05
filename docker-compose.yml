@@ -1,4 +1,3 @@
-
 version: '3.5'
 # version of docker-compose that we are using
 services:
