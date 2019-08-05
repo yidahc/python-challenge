@@ -10,14 +10,22 @@ services:
   - docker # to build docker-compose containers for further api testing
 
 env:
-  - DOCKER_COMPOSE_VERSION=3.5
+  - DOCKER_COMPOSE_VERSION=1.8.0
 
 before_install:
+  - sudo apt-get update
+  - pip install codecov
+  - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
-  - pip install codecov
+  - sudo mv docker-compose /usr/local/bin
+  - docker-compose --version
+  - docker-compose pull
   - docker-compose build
   - docker-compose up
+  - docker ps
+
+# https://medium.com/@elliotchance/using-docker-compose-on-travis-ci-6ce9664b51c4
 
 install:
   - pip install Flask==1.0.2
