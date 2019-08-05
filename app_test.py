@@ -36,7 +36,7 @@ def test_checkBoard(board, queen):
   assert not checkBoard (invalidBishopBoard, n)
   assert not checkBoard (invalidRookBoard, n)
 
-@pytest.mark.parametrize("queen",[(4),(8),(10)])
+@pytest.mark.parametrize("queen",[(4),(6),(8),(10),(12)])
 def test_solution_amount(queen):
   amount = len(nQueens(queen, [], []))
   assert amount == solutionNumbers[queen]

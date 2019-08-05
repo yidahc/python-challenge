@@ -45,3 +45,4 @@ if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
 
 # connecting to postgress db learned on https://vsupalov.com/flask-sqlalchemy-postgres/
+# and https://medium.com/@hmajid2301/implementing-sqlalchemy-with-docker-cb223a8296de

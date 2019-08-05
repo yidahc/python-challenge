@@ -1,22 +1,28 @@
 language: python
 
 python:
- - "3.6"
-
-cache: pip
+  - 2.7
+  - 3.5
+  - 3.6
+# versions of pytest we are running tests on
 
 services:
-  - docker
+  - docker # to build docker-compose containers for further api testing
 
 before_install:
+  - pip install -U pip # ensure we are working with the latest version of pip 
+  - pip install -U pytest # 
+  - pip install codecov
   - docker-compose build
   - docker-compose up
 
 install:
-  - pip install -r requirements.txt
+  - pip install -r testrequirements.txt
 
-script: python app_test.py
+script: python app_test.py # run tests
 
+after_success:
+  - codecov # submit coverage
 
 # https://www.smartfile.com/blog/testing-python-with-travis-ci/
 # https://docs.travis-ci.com/user/docker/#using-docker-compose
