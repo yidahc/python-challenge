@@ -6,9 +6,6 @@ python:
   - 3.6
 # versions of python we are running tests on
 
-services:
-  - docker # to build docker-compose containers for further api testing
-
 before_install:
   - sudo apt-get update
   - pip install codecov

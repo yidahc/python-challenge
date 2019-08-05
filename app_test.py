@@ -47,6 +47,9 @@ def test_nQueens():
     assert checkBoard(solution, n)
 
 def test_api(supply_results):
+  print (supply_results())
+  # testing that api is able to produce solutions, store each one correctly in db, 
+  # query them from db, manipulate them properly and send them back as a response
   assert supply_results()
 
  # solution numbers found on page 314 of https://camo.ici.ro/journal/vol19/v19b11.pdf
