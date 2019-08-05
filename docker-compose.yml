@@ -16,7 +16,7 @@ services:
     # incoming requests at host port 5001 will be forwarded to the port 5000 of the api container
     # runs on local computer at localhost:5001
     volumes:
-      - ./results-api/src:/app
+      - ./api/src:/app
       # This mounts the .results-api/src directory on our host computer to the /app directory in the container. 
     depends_on:
       - postgres-database
