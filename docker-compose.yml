@@ -9,7 +9,7 @@ services:
     # Docker parses the docker-compose file and builds our services according to the build instructions.
       context: ./api
       # where the Dockerfile is located at to build the image
-    enviornment: 
+    environment: 
       - POSTGRES_USER
       - POSTGRES_PASSWORD
       - POSTGRES_HOST
@@ -43,7 +43,7 @@ services:
   postgres-database:
       image: postgres:latest
       # provides an instance of postgress database
-      enviornment: 
+      environment: 
         - POSTGRES_USER
         - POSTGRES_PASSWORD
         # postgress automatically makes the user and password based on these env variables
