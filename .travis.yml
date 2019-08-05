@@ -9,7 +9,14 @@ python:
 services:
   - docker # to build docker-compose containers for further api testing
 
+env:
+  - DOCKER_COMPOSE_VERSION=3.5
+
 before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
   - pip install pip # ensure we are working with the latest version of pip 
   - pip install pytest # 
   - pip install codecov
