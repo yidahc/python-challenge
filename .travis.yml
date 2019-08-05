@@ -10,7 +10,7 @@ services:
   - docker # to build docker-compose containers for further api testing
 
 env:
-  - DOCKER_COMPOSE_VERSION=1.8.0
+  - DOCKER_COMPOSE_VERSION=3.5
 
 before_install:
   - sudo apt-get update
