@@ -18,5 +18,4 @@ EXPOSE 5000
 # Run the server
 CMD python server.py 
 
-# Docker and docker-compose learned here: 
-# https://medium.com/@audretschjames/understanding-docker-as-if-it-were-a-gameboy-96c96392efbf
+# Docker and docker-compose learned here: https://medium.com/@audretschjames/understanding-docker-as-if-it-were-a-gameboy-96c96392efbf
