@@ -45,7 +45,7 @@ $ export POSTGRES_PORT=5432
       depends_on:
         - resultsapi
 
-  postgres-database:
+  postgresdb:
       image: postgres:latest
       # provides an instance of postgress database
       environment: 
@@ -67,4 +67,4 @@ volumes:
   # and here: https://linuxhint.com/run_postgresql_docker_compose/
   # and here: https://medium.com/@audretschjames/understanding-docker-as-if-it-were-a-gameboy-96c96392efbf
 
-# add a server to database and connect like api is doing, then connect that server to api server?
+# add a server to database and connect like api is doing, then that's the api?
