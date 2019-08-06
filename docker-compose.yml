@@ -1,56 +1,64 @@
-version: '3.5'
+version: '3.3'
 # version of docker-compose that we are using
 services:
 # containters we want to run
-  results-api:
+  resultsapi:
   #name of service
     # provides an API for CRUD* operations to database
     build:
     # Docker parses the docker-compose file and builds our services according to the build instructions.
-      context: ./results-api
+      context: ./resultsapi
       # where the Dockerfile is located at to build the image
-    env_file: database.conf
-      # dotenv file w/variables necessary to connect to postgress-database:5432
+    environment: 
+    # its value at build time is the value in the environment where Compose is running (no need to import os).
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_HOST
+      - POSTGRES_DB
+      - POSTGRES_PORT
+    # variables necessary to connect to database
     ports:
       - 5001:5000  # <host machine>:<container> map ports from the host machine to the container
     # incoming requests at host port 5001 will be forwarded to the port 5000 of the api container
+    # runs on local computer at localhost:5001
     volumes:
-      - ./results-api/src:/app
-      # This mounts the .results-api/src directory on our host computer to the /app directory in the container. 
+      - ./resultsapi/src:/app
+    # This mounts the .resultsapi/src directory on our host computer to the /app directory in the container. 
     depends_on:
-      - postgres-database
+      - postgresdb
     # it will wait for database to start before starting this service.
 
   front-end:
       build:
-        context: ./front-end
+        context: ./frontend
       environment:
-      - RESULTS_API_SERVER=http://results-api:5000
+        - RESULTS_API_SERVER
       ports:
         - 5000:5000
       volumes:
-        - ./front-end/src:/app
+        - ./frontend/src:/app
       depends_on:
-        - results-api
+        - resultsapi
 
-  postgres-database:
-      image: postgres:latest
-      # provides an instance of postgress database
-      environment:
-        POSTGRES_USER: docker
-        POSTGRES_PASSWORD: docker
-        # postgress automatically makes the user and password based on these env variables
+  postgresdb:  # provides an instance of postgress database
+      image: postgres:latest 
+      environment: 
+        POSTGRES_USER
+        POSTGRES_PASSWORD
+          # postgress automatically makes the user and password based on these env variables
         # so we can use this user and pswd on api to connect to db
       volumes:
-        - db_volume:/var/lib/postgresql
+        - dbvolume:/var/lib/postgresql/
     # Inside the container, this directory is where Postgres stores all the relevant tables and databases.
     # We are defining a volume inside the compose file and mounting it at this mount point.
-    # ports not needed since docker image automatically exposes port 5432
-
+  
 volumes:
-  # For data persistence purposes, we are storing data in a mouted volume which we have named db-data
-  db_volume:
+  # For data persistence purposes, we are storing data in a mouted volume which we have named dbvolume
+  dbvolume:
+    driver: local
 
   # postgress with docker-compose learned here: https://docs.docker.com/samples/library/postgres/
   # and here: https://linuxhint.com/run_postgresql_docker_compose/
   # and here: https://medium.com/@audretschjames/understanding-docker-as-if-it-were-a-gameboy-96c96392efbf
+
+# add a server to database and connect like api is doing, then that's the api?
