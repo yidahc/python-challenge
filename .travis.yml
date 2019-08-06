@@ -1,10 +1,16 @@
 language: python
 
 python:
-  - 2.7
-  - 3.5
+ # - 2.7
+ # - 3.5
   - 3.6
 # versions of python we are running tests on
+
+services:
+  - docker # to build docker-compose containers for further api testing
+
+env:
+  - RESULTS_API_SERVER = http://api:5000
 
 before_install:
   - sudo apt-get update
@@ -12,7 +18,7 @@ before_install:
   - docker-compose --version
   - docker-compose pull
   - docker-compose build
-  - docker-compose up
+  - docker-compose start
   - docker ps
 
 # https://medium.com/@elliotchance/using-docker-compose-on-travis-ci-6ce9664b51c4
