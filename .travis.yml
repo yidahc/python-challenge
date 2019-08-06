@@ -9,8 +9,8 @@ python:
 services:
   - docker # to build docker-compose containers for further api testing
 
-env:
-  - RESULTS_API_SERVER = http://resultsapi:5000
+#env:
+#  - RESULTS_API_SERVER = http://resultsapi:5000
 
 before_install:
   - sudo apt-get update

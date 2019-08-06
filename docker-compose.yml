@@ -53,7 +53,7 @@ services:
 volumes:
   # For data persistence purposes, we are storing data in a mouted volume which we have named dbvolume
   dbvolume:
-    driver: 
+    driver: local
 
   # postgress with docker-compose learned here: https://docs.docker.com/samples/library/postgres/
   # and here: https://linuxhint.com/run_postgresql_docker_compose/
