@@ -43,8 +43,8 @@ services:
   postgresdb:  # provides an instance of postgress database
       image: postgres:latest 
       environment: 
-        POSTGRES_USER
-        POSTGRES_PASSWORD
+       - POSTGRES_USER
+       - POSTGRES_PASSWORD
           # postgress automatically makes the user and password based on these env variables
         # so we can use this user and pswd on api to connect to db
       volumes:
