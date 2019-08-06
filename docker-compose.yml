@@ -28,7 +28,11 @@ services:
     depends_on:
       - postgresdb
     # it will wait for database to start before starting this service.
-
+export POSTGRES_USER=queens
+$ export POSTGRES_PASSWORD=1a2b3c
+$ export POSTGRES_DB=queens
+$ export POSTGRES_HOST=postgres\-database
+$ export POSTGRES_PORT=5432
   front-end:
       build:
         context: ./frontend
@@ -42,7 +46,6 @@ services:
         - resultsapi
 
   postgres-database:
-    postgresdb:
       image: postgres:latest
       # provides an instance of postgress database
       environment: 
