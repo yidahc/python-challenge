@@ -1,15 +1,16 @@
-version: '3.5'
+version: '3.3'
 # version of docker-compose that we are using
 services:
 # containters we want to run
-  api:
+  resultsapi:
   #name of service
     # provides an API for CRUD* operations to database
     build:
     # Docker parses the docker-compose file and builds our services according to the build instructions.
-      context: ./api
+      context: ./resultsapi
       # where the Dockerfile is located at to build the image
     environment: 
+    # its value at build time is the value in the environment where Compose is running (no need to import os).
       - POSTGRES_USER
       - POSTGRES_PASSWORD
       - POSTGRES_HOST
@@ -22,8 +23,8 @@ services:
     # incoming requests at host port 5001 will be forwarded to the port 5000 of the api container
     # runs on local computer at localhost:5001
     volumes:
-      - ./api/src:/app
-      # This mounts the .api/src directory on our host computer to the /app directory in the container. 
+      - ./resultsapi/src:/resultsapi
+      # This mounts the .resultsapi/src directory on our host computer to the /app directory in the container. 
     depends_on:
       - postgresdb
     # it will wait for database to start before starting this service.
@@ -38,7 +39,7 @@ services:
       volumes:
         - ./frontend/src:/app
       depends_on:
-        - api
+        - resultsapi
 
   postgres-database:
     postgresdb:
@@ -50,15 +51,17 @@ services:
         # postgress automatically makes the user and password based on these env variables
         # so we can use this user and pswd on api to connect to db
       volumes:
-        - db_volume:/var/lib/postgresql
+        - dbvolume:/var/lib/postgresql
     # Inside the container, this directory is where Postgres stores all the relevant tables and databases.
     # We are defining a volume inside the compose file and mounting it at this mount point.
   
 volumes:
-  # For data persistence purposes, we are storing data in a mouted volume which we have named db-data
-  db_volume:
-    driver: local
+  # For data persistence purposes, we are storing data in a mouted volume which we have named dbvolume
+  dbvolume:
+    driver: mydriver
 
   # postgress with docker-compose learned here: https://docs.docker.com/samples/library/postgres/
   # and here: https://linuxhint.com/run_postgresql_docker_compose/
   # and here: https://medium.com/@audretschjames/understanding-docker-as-if-it-were-a-gameboy-96c96392efbf
+
+# add a server to database and connect like api is doing, then connect that server to api server?
