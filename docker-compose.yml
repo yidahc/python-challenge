@@ -25,9 +25,9 @@ services:
     # runs on local computer at localhost:5001
     volumes:
       - ./resultsapi/src:/resultsapi
-      - dbvolume:/var/lib/postgresql      # This mounts the .resultsapi/src directory on our host computer to the /app directory in the container. 
-    depends_on:
-      - postgresdb
+      - dbvolume:/var/lib/postgresql/data     # This mounts the .resultsapi/src directory on our host computer to the /app directory in the container. 
+ #   depends_on:
+#      - postgres
     # it will wait for database to start before starting this service.
 
   front-end:
