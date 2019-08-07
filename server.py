@@ -1,5 +1,5 @@
 import json
-from __init__ import create_app
+from app import create_app
 from flask import request
 from models import db, Solution
 from queens import nQueens, convertBoard
