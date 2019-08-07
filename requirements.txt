@@ -1,0 +1,5 @@
+Flask==1.0.2
+requests==2.7.0
+psycopg2-binary==2.7.6.1
+flask-sqlalchemy==2.3.0 
+

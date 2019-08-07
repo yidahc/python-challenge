@@ -10,6 +10,7 @@ invalidRookBoard = [3, 7, 2, 8, 6, 9, 8, 5, 1, 4]
 invalidBishopBoard = [7, 3, 1, 6, 3, 5, 0, 8, 4, 2]
 
 solutionNumbers =	{
+# solution numbers from page 314 of https://camo.ici.ro/journal/vol19/v19b11.pdf
     0: 0,
     1: 1,
     2: 0,
@@ -25,7 +26,8 @@ solutionNumbers =	{
     12: 14200
     }
 
-@pytest.mark.parametrize("board, addition",[([0, 2, 5],3),([2, 5, 1, 4, 7],6)])
+@pytest.mark.parametrize("board, addition",[([0, 2, 5],3),([5, 1, 4, 7],2)])
+# addiing parameters, to run tests on several diferent possible inputs
 def test_bishop_threatened(board, addition):
   assert bishop_threatened(board, addition)
   assert not bishop_threatened([0, 2, 5], 1)
@@ -45,13 +47,3 @@ def test_nQueens():
   solutions = nQueens(n, [], [])
   for solution in solutions:
     assert checkBoard(solution, n)
-
-#def test_api(supply_results):
-#  print (supply_results())
-  # testing that api is able to produce solutions, store each one correctly in db, 
-  # query them from db, manipulate them properly and send them back as a response
-#  assert supply_results()
-
- # solution numbers found on page 314 of https://camo.ici.ro/journal/vol19/v19b11.pdf
-
-# tests based heavily off https://github.com/cuenca-mx/clabe-python/blob/master/test_clabe.py

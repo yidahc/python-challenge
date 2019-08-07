@@ -4,29 +4,16 @@ python:
   - 3.6
 # versions of python we are running tests on
 
-services:
-  - docker # to build docker-compose containers for further api testing
+cache: pip
 
 before_install:
   - sudo apt-get update
   - pip install codecov
-  - docker-compose --version
-  - docker-compose pull
-  - docker-compose build
-  - docker-compose up
-
-# https://medium.com/@elliotchance/using-docker-compose-on-travis-ci-6ce9664b51c4
 
 install:
-  - pip install Flask==1.0.2
-  - pip install requests==2.7.0
-  - pip install psycopg2-binary==2.7.6.1
-  - pip install flask-sqlalchemy==2.3.0 
+  - pip install -r requirements.txt
 
 script: python app_test.py # run tests
 
 after_success:
   - codecov # submit coverage
-
-# https://www.smartfile.com/blog/testing-python-with-travis-ci/
-# https://docs.travis-ci.com/user/docker/#using-docker-compose
