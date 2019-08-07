@@ -54,5 +54,3 @@ def checkBoard(board, n):
   # if any check fails, it is not a valid solution
   return False
 
-print (nQueens(4))
-# checkBoard from http://code.activestate.com/recipes/576647-eight-queens-six-lines/?fbclid=IwAR2agAgxDON-HRZieQm3hcSfXRIcho0PStTml6uScNrs-McgXf7nydvyZaM

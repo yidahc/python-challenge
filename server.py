@@ -1,12 +1,11 @@
 import json
 from __init__ import create_app
 from flask import request
-from .models import db, Solution
-from .queens import nQueens
+from models import db, Solution
+from queens import nQueens
 
 app = create_app()
 
-# this will run on local computer on http://0.0.0.0:5001/show
 @app.route('/add', methods=['POST'])
 def add():
     data = request.get_json()
@@ -30,6 +29,7 @@ def add():
     return json.dumps("Solutions Added"), 200
 
 @app.route('/show', methods=["GET"])
+# this will run on local computer on http://0.0.0.0:5001/show
 def fetch():
     # query all entries(rows) in db
     solutions = Solution.query.all()
@@ -50,5 +50,3 @@ def fetch():
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
-
-# connecting to postgress db learned on 
