@@ -4,6 +4,8 @@ python:
   - 3.6
 # versions of python we are running tests on
 
+install: skip
+
 cache: pip
 
 script: python app_test.py # run tests
