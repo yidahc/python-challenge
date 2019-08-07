@@ -61,6 +61,8 @@ def checkBoard(board, n):
 # function to convert single list boards into a nested list matrix
 def convertBoard (b):
   board = re.findall("\d",b)
+  # board is stored as a string, using findall to return a list with all digits found in string
+  # digits will still be strings, but are now in a list instead of part of a string
   N = len(board) 
   S = range(N) # size of matrix (NxN)
   newBoard = [] + [[]] * N # creating matrix with N amount of empty rows
@@ -71,6 +73,7 @@ def convertBoard (b):
     newRow = [0] * N # building new row, with N amount of empty columns (0 stands for empty spot)
     newRow[int(board[i])] = 1 # placing queen in new row at its correct collumn placement (1 represents queen)
     # each value in original board stands for its column placement in its row
+    # converting board value to int as it is still a string
     newBoard[i] = newRow # placing new row at its correct placement in matrix 
     # each value's row placement is represented by its index in the original board
   return newBoard
