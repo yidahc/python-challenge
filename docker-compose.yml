@@ -10,7 +10,6 @@ services:
       context: .
       # where the Dockerfile is located at to build the image
     environment: 
-    # its value at build time is the value in the environment where Compose is running (no need to import os).
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=1a2b3c
       - POSTGRES_HOST=postgresdb
@@ -34,6 +33,8 @@ services:
         context: ./frontend
       environment:
         - RESULTS_API_SERVER=http://resultsapi:5000
+    # To keep secrets, if only key and no value is entered, its value at build time is the value in the 
+    # environment where Compose is running (no need to import os). ex: - RESULTS_API_SERVER
       ports:
         - 5000:5000
       volumes:

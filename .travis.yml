@@ -4,12 +4,4 @@ python:
   - 3.6
 # versions of python we are running tests on
 
-cache: pip
-
-before_install:
-  - pip install codecov
-
 script: python app_test.py # run tests
-
-after_success:
-  - codecov # submit coverage
