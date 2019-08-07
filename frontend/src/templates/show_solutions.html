@@ -16,21 +16,28 @@
         <table class='table'>
             <thead>
                 <tr>
-                    <th>Solutions</th>
-                    <th># of Queens</th>
-                    <th>Number of solutions</th>
+                    <th>N of Queens</th>
+                    <th>Total Solutions</th>
+                    <th>Solution Board</th>
                 </tr>
             </thead>
-            <tbody>
-                    {% for x in solutions %}
+            {% for x in solutions %}
+            <tbody>      
                     <tr>
-                            <td>{{x.board}}</td>
                             <td>{{x.n}}</td>
                             <td>{{x.total}}</td>
+                    </tr>  
+                    {% for i in x.board %}
+                    <tr>     
+                            <td>   </td> 
+                            <td>   </td> 
+                            <td>{{i}}</td>
                     </tr>
                     {% endfor %}
             </tbody>
+            {% endfor %}
         </table>
+        
     </div>
 
 

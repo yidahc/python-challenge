@@ -58,7 +58,15 @@ services:
     # <We are defining a volume inside the compose file and mounting it at this mount point> : 
       # <Inside the container, this directory is where Postgres stores all the relevant tables and databases>
     # ports not needed since docker image automatically exposes port 5432 and we do not to expose it locally
+  
+  pytest:
+      build:
+        context: .
+        dockerfile: Dockerfile-test
+      volumes:
+          - .:/app
 
+      
 volumes:
   # For data persistence purposes, we are storing data in a mouted volume which we have named db-data
   dbvolume:
