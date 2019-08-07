@@ -47,3 +47,9 @@ def test_nQueens():
   solutions = nQueens(n, [], [])
   for solution in solutions:
     assert checkBoard(solution, n)
+
+def test_api(supply_results):
+  print (supply_results())
+   testing that api is able to produce solutions, store each one correctly in db, 
+   query them from db, manipulate them properly and send them back as a response
+  assert supply_results()
