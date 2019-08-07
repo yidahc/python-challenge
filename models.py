@@ -13,7 +13,5 @@ class Solution(db.Model):
 
 #Defining how our data will be represented
  #   def __repr__(self):
-  #      return "<Solution(id='{}', board='{}', n='{}', total='{}')>"\
+  #      return "<Solution(id='%d', board='%s', n='%d', total='%d')>"\
    #         .format(self.id, self.board, self.n, self.total)
-
-# original sqlalchemy (switched to flask-sqlalchemy later) & postgress learned from https://www.learndatasci.com/tutorials/using-databases-python-postgres-sqlalchemy-and-alembic/?fbclid=IwAR2YYvFgPMvGfEIeFPSVsZ0XvIQCWpvzAWhcMr0lU-9jNL9ndvbbU3pPluQ

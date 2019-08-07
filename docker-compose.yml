@@ -7,35 +7,40 @@ services:
     # provides an API for CRUD operations to database
     build:
     # Docker parses the docker-compose file and builds our services according to the build instructions.
-      context: ./resultsapi
+      context: .
       # where the Dockerfile is located at to build the image
     environment: 
     # its value at build time is the value in the environment where Compose is running (no need to import os).
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
-      - POSTGRES_HOST
-      - POSTGRES_DB
-      - POSTGRES_PORT
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1a2b3c
+      - POSTGRES_HOST=postgresdb
+      - POSTGRES_DB=postgres
+      - POSTGRES_PORT=5432
     # variables necessary to connect to database
     ports:
-      - 5001:5000  # <host machine>:<container> map ports from the host machine to the container
+      - 5001:5000  
+    # <host machine>:<container> map ports from the host machine to the container
     # incoming requests at host port 5001 will be forwarded to the port 5000 of the api container
     volumes:
-      - ./resultsapi/src:/app
-      # This mounts the .results-api/src directory on our host computer to the /app directory in the container. 
+      - .:/app
+      # Mounts <current directory on our host computer to> : </app directory in the container. >
     depends_on:
       - postgresdb
     # it will wait for database to start before starting this service.
 
   front-end:
+    # displays html to user and connects to api
       build:
         context: ./frontend
       environment:
-        - RESULTS_API_SERVER
+        - RESULTS_API_SERVER=http://resultsapi:5000
       ports:
         - 5000:5000
       volumes:
         - ./frontend/src:/app
+      # mount <all files pertaining to this service to> : <file in docker container we are naming /app>
+      # this allows us to modify program while container is up and see changes in real time
+      # this is later used in dockerfile to run the service
       depends_on:
         - resultsapi
 
@@ -43,15 +48,15 @@ services:
       image: postgres:latest
       # provides an instance of postgress database
       environment: 
-       - POSTGRES_USER
-       - POSTGRES_PASSWORD
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1a2b3c
         # postgress automatically makes the user and password based on these env variables
         # so we can use this user and pswd on api to connect to db
       volumes:
         - dbvolume:/var/lib/postgresql
-    # Inside the container, this directory is where Postgres stores all the relevant tables and databases.
-    # We are defining a volume inside the compose file and mounting it at this mount point.
-    # ports not needed since docker image automatically exposes port 5432
+    # <We are defining a volume inside the compose file and mounting it at this mount point> : 
+      # <Inside the container, this directory is where Postgres stores all the relevant tables and databases>
+    # ports not needed since docker image automatically exposes port 5432 and we do not to expose it locally
 
 volumes:
   # For data persistence purposes, we are storing data in a mouted volume which we have named db-data

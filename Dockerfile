@@ -3,13 +3,13 @@ FROM  python:3.6
 
 # Installing only requirements first, into tmp directory, so this process 
 # is cached properly whenever another file changes
-COPY ./src/requirements.txt /tmp
+COPY requirements.txt /tmp
 
 # Install Requirements
 RUN pip install -r /tmp/requirements.txt 
 
-# Assigning working directory (cd app) this directory was hosted by docker-compose from src folder
-WORKDIR /app   
+# Opening and assigning working directory (like cd app) this directory was hosted by docker-compose from src folder
+WORKDIR /app
 
 # Expose flask's port
 EXPOSE 5000

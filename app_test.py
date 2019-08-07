@@ -1,5 +1,5 @@
 import pytest
-from resultsapi.src.queens import bishop_threatened, nQueens, checkBoard
+from queens import bishop_threatened, nQueens, checkBoard
 
 n = 10
 
