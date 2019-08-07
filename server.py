@@ -36,7 +36,6 @@ def fetch():
     all_solutions = []
     # iterate through queried solutions and 
     for solution in solutions:
-        print (solution.board)
         new_solution = {
             "id": solution.id,
             "board": solution.board,
