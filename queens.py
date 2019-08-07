@@ -1,3 +1,4 @@
+import re
 
 def nQueens(n, board=[], results=[]):
   # base case: if board is full, we can end this recursive call
@@ -57,40 +58,19 @@ def checkBoard(board, n):
   return False
 
 
-def matrixBoards (board):
-  newBoard = [] 
-  queens = len(board) # amount of queens == N
-  S = range(queens)  # size of matrix (NxN)
-
-  for queen in board: # looping through board (first iteration over N)
-    # each queen value stands for its placement in its row (its column index on its new row)
-    newRow = []
-    # creating a new newRow for each queen in board (creating N rows)
-    for c in S:
-    # second iteration over N to add N columns in each row
-      if c != queen:
-      # if the column we are adding is not where a queen should be
-        newRow.append(0)
-        # build column by adding a 0 (empty spot) to row we are building
-      else:
-      # if the column we are adding is where this row's queen placement is 
-        newRow.append(1)
-        # place a queen there instead (represented by 1)
-    newBoard.append(newRow)    
-    # adding each new row to matrix
-  return newBoard
-
 # function to convert single list boards into a nested list matrix
-def convertBoard (board):
-  N = len(board) # size of matrix (NxN)
-  S = range(N)
-  newBoard = [] + [[]] * N # creating matrix with N amount of rows
+def convertBoard (b):
+  board = re.findall("\d",b)
+  N = len(board) 
+  S = range(N) # size of matrix (NxN)
+  newBoard = [] + [[]] * N # creating matrix with N amount of empty rows
 
-  for i in S: # iterate through N to fill empty rows
-    newRow = [0] * N # creating a new row for each queen in board, with N amount of empty spaces
-    newRow[board[i]] = 1 # placing queen in new row at its 
-    newBoard[i] = newRow
-  # needs to refer to index of this queen
+  for i in S: # iterate through N to fill empty rows with N amount of columns
+    # also using this loop to index board as it is the same size 
+    # we can directly reference each value in board instead of having to loop through it
+    newRow = [0] * N # building new row, with N amount of empty columns (0 stands for empty spot)
+    newRow[int(board[i])] = 1 # placing queen in new row at its correct collumn placement (1 represents queen)
+    # each value in original board stands for its column placement in its row
+    newBoard[i] = newRow # placing new row at its correct placement in matrix 
+    # each value's row placement is represented by its index in the original board
   return newBoard
-
-print (convertBoard([1, 3, 0, 2]))

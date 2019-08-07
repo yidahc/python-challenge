@@ -2,7 +2,7 @@ import json
 from __init__ import create_app
 from flask import request
 from models import db, Solution
-from queens import nQueens, matrixBoards
+from queens import nQueens, convertBoard
 
 app = create_app()
 
@@ -38,7 +38,7 @@ def fetch():
     for solution in solutions:
         new_solution = {
             "id": solution.id,
-            "board": solution.board,
+            "board": convertBoard(solution.board),
             "n": solution.n,
             "total": solution.total
         }
