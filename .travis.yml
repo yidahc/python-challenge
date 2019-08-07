@@ -5,6 +5,7 @@ python:
 # versions of python we are running tests on
 
 install: skip
+# skipping installation of requirements as they are not needed to run tests on nQueens functions
 
 cache: pip
 # cache content that does not often change, to speed up your build process. 

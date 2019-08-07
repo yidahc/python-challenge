@@ -2,7 +2,7 @@ import json
 from __init__ import create_app
 from flask import request
 from models import db, Solution
-from queens import nQueens
+from queens import nQueens, matrixBoards
 
 app = create_app()
 
@@ -36,17 +36,17 @@ def fetch():
     all_solutions = []
     # iterate through queried solutions and 
     for solution in solutions:
-    # restructure each class instance as dictionaries to store in all_solutions list
+        print (solution.board)
         new_solution = {
             "id": solution.id,
             "board": solution.board,
             "n": solution.n,
             "total": solution.total
         }
-
+    # restructure each class instance as dictionaries to store in all_solutions list
         all_solutions.append(new_solution)
-    # return list with all solutions as a json
     return json.dumps(all_solutions), 200
+    # return list with nested dictionaries of all solutions as a json
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

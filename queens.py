@@ -2,10 +2,10 @@
 def nQueens(n, board=[], results=[]):
   # base case: if board is full, we can end this recursive call
   if len(board) == n:
-    # double checking the board we built recursively is threat-free (really not neccessary, but better safe than sorry)
     if checkBoard(board, n):
-      # add board to results
-      results.append(board) 
+    # double checking the board we built recursively is threat-free (really not neccessary, but better safe than sorry)
+      results.append(matrixBoards(board))
+      # convert board to matrix and add to results
 
   # recursive case: iterates through n, minus values already present in the board we are currently building
   # which also checks for rook threats (set also checks for duplicates), eliminating any horizontal threats
@@ -56,6 +56,7 @@ def checkBoard(board, n):
   # if any check fails, it is not a valid solution
   return False
 
+
 # function to convert single list boards into a nested list matrix
 def matrixBoards (board):
   newBoard = [] # creating matrix
@@ -67,17 +68,17 @@ def matrixBoards (board):
     newRow = []
     # creating a new newRow for each queen in board (creating N rows)
     for c in S:
-    # second iteration over N to create N columns in each row
+    # second iteration over N to add N columns in each row
       if c != queen:
-      # if the column we are buidling is not where a queen should be
+      # if the column we are adding is not where a queen should be
         newRow.append(0)
         # build column by adding a 0 (empty spot) to row we are building
       else:
-      # if the column we are creating is where this row's queen placement is 
+      # if the column we are adding is where this row's queen placement is 
         newRow.append(1)
         # place a queen there instead (represented by 1)
     newBoard.append(newRow)    
     # adding each new row to matrix
   return newBoard
 
-print (matrixBoards([1,3,0,2]))
+print (nQueens(4))

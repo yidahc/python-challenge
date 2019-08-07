@@ -5,7 +5,7 @@ db = SQLAlchemy()
 class Solution(db.Model):
     __tablename__ = 'solutions'
     id = db.Column(db.Integer, primary_key=True)
-    board = db.Column(db.String(50))
+    board = db.Column(db.Text) #  string is for short texts (when storing single list boards) & text used for large blocks of text (matrix boards)
     n = db.Column(db.Integer)
     total = db.Column(db.Integer)
 
